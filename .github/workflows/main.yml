@@ -1,0 +1,20 @@
+name: Deploy t vercel
+
+on:
+  push:
+    branches: 
+      - master
+      - develop
+jobs:
+  Deploy-to-production:
+    runs-on: ubunto-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: stage 1
+        run: echo "hello world"
+        
+      - name: stage 2 - install Vercel CLI 
+        run: yarn global add vercel@latest
+        
+      - name: stage 3 - Pull vercel token 
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
